@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from config.config import BASE_URL
-from config.config import CAR_INPUT_TXT_FILE
+from config.config import HEADLESS_MODE
 from config.config import CAR_OUTPUT_TXT_FILE
 from test_data.get_test_data import GetTestData
 
