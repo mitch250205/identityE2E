@@ -1,0 +1,5 @@
+selenium~=4.29.0
+pytest~=8.3.5
+names~=0.3.0
+requests~=2.32.3
+webdriver-manager~=4.0.2
