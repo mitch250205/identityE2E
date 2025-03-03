@@ -1,22 +1,34 @@
 # test_data.py
 import re
-import json
+import os
 
 class GetTestData:
     def __init__(self,input_file_path=None, output_file_path=None):
         """Initialize the test data"""
         self.test_data = []
         self.output_test_data = []
-        self.test_data_json = {}
-        self.test_output_data_json = {}
 
         # Process the file if a path is provided
         if input_file_path:
-            self.process_car_data_text_file(input_file_path)
+            self.process_all_input_text_files(input_file_path)
         if output_file_path:
-            self.get_output_file(output_file_path)
+            self.process_all_output_text_files(output_file_path)
 
+    def process_all_input_text_files(self,input_file_path):
+        """Recursively iterate through all subdirectories and process text files."""
+        for root, _, files in os.walk(input_file_path):
+            for file in files:
+                if file.endswith(".txt"):  # Process only text files
+                    file_path = os.path.join(root, file)
+                    self.process_car_data_text_file(file_path)
 
+    def process_all_output_text_files(self,output_file_path):
+        """Recursively iterate through all subdirectories and process text files."""
+        for root, _, files in os.walk(output_file_path):
+            for file in files:
+                if file.endswith(".txt"):  # Process only text files
+                    file_path = os.path.join(root, file)
+                    self.get_output_file(file_path)
 
     def get_data(self):
         """Return the test data as a list"""
@@ -78,7 +90,6 @@ class GetTestData:
             ]
 
             # Store extracted data as a list of tuples
-            self.test_data = []
             for i, reg in enumerate(reg_numbers):
                 value = processed_prices[i] if i < len(processed_prices) else "Unknown"
                 if ' ' not in reg:
