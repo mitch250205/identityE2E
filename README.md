@@ -35,7 +35,7 @@ to run all tests using confused.com: pytest -v -s -m confused
 Notes:
 ******
 1. Deafult BASE_URL is set to https://www.confused.com/ so only this site will be used in this release.
-   Additionally tests using Motorway.com are skipped since I was unable to use it after a number of tests due to automation so these are not fully completed and validated
+   Additionally tests using Motorway.com are skipped since I was blocked from using it after many test executions, so these are not fully completed and validated
 3. I have included some code to capture and deal with an AI helper pop up, however this happened very rarely and I was unable to fully validate it in this release.
 4. This code is not currently designed to run in headless mode.
 
