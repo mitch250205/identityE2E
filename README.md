@@ -2,6 +2,19 @@ SET UP:
 ******
 Code was written using a MAC
 Make sure your machine has python 3 installed
+
+Python	
+3.13.2
+Platform	
+macOS-14.6.1-x86_64-i386-64bit-Mach-O
+Packages	
+pytest: 8.3.5
+pluggy: 1.5.0
+Plugins	
+html: 4.1.1
+metadata: 3.1.1
+
+
 Clone this repository
 Create a virtual environment
 python -m venv .venv
@@ -49,7 +62,7 @@ Installation Steps
 
 1. Clone this repository
 
-git clone <repository_url>
+git clone git@github.com:mitch250205/identityE2E.git
 cd identityE2E
 
 2. Create a virtual environment
@@ -62,9 +75,6 @@ macOS/Linux:
 
 source .venv/bin/activate
 
-Windows:
-
-.venv\Scripts\activate
 
 4. Install dependencies
 
@@ -89,6 +99,10 @@ Run Tests for Confused.com Only:
 
 pytest -v -s -m confused
 
+Run Tests for Confused.com Only and create a html report:
+
+pytest -v -s -m confused --html=report.html --self-contained-html
+
 Important Notes 📌
 
 1. Default Site:
@@ -107,4 +121,4 @@ However, this pop-up appears very rarely and inconsistently, so validation is no
 
 The tests are not currently optimized for headless execution.
 
-If required, this can be enabled in config/config.py.
+Headless mode will be in a later release, however this can be enabled in config/config.py but is NOT advised.

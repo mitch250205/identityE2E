@@ -1,12 +1,11 @@
-import time
 import pytest
 from pages.motorway_landing_page import MotorwayPage
 from pages.confused_landing_page import ConfusedPage
 from test_data.get_test_data import GetTestData
-from config.config import CAR_OUTPUT_TXT_FILE, CAR_INPUT_TXT_FILE, CONFUSED_BASE_URL
+from config.config import CAR_OUTPUT_TXT_FILE, CAR_INPUT_TXT_FILE
 
 
-def get_year_from_plate(number_plate):
+def get_year_from_plate(number_plate: str) -> str | int:
     """Extracts the year from a UK-style number plate."""
     if len(number_plate) < 4:
         return "Invalid plate format"
@@ -33,7 +32,7 @@ output_data = {row[0]: row[1:] for row in GetTestData(output_file_path=CAR_OUTPU
 
 @pytest.mark.skip(reason="Temporarily disabled due to motorway.com restrictions")
 @pytest.mark.parametrize("number_plate", input_data)
-def test_motorway_car_valuation(browser, cookies_accepted, number_plate):
+def test_motorway_car_valuation(browser, cookies_accepted, number_plate) -> None:
     """Validates the car valuation data on Motorway."""
     try:
         assert number_plate in output_data, f"❌ Missing expected output data for {number_plate}"
@@ -67,7 +66,7 @@ def test_motorway_car_valuation(browser, cookies_accepted, number_plate):
 
 @pytest.mark.confused
 @pytest.mark.parametrize("number_plate", input_data)
-def test_confused_car_valuation(browser, cookies_accepted, number_plate):
+def test_confused_car_valuation(browser, cookies_accepted, number_plate) -> None:
     """Validates car valuation data on Confused.com."""
     try:
         assert number_plate in output_data, f"❌ Missing expected output data for {number_plate}"
