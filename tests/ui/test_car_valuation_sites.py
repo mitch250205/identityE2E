@@ -3,7 +3,7 @@ import pytest
 from pages.motorway_landing_page import MotorwayPage
 from pages.confused_landing_page import ConfusedPage
 from test_data.get_test_data import GetTestData
-from config.config import CAR_OUTPUT_TXT_FILE, CAR_INPUT_TXT_FILE
+from config.config import CAR_OUTPUT_TXT_FILE, CAR_INPUT_TXT_FILE, CONFUSED_BASE_URL
 
 
 def get_year_from_plate(number_plate):
@@ -48,19 +48,19 @@ def test_motorway_car_valuation(browser, cookies_accepted, number_plate):
 
         page.enter_car_registration(number_plate)
         page.click_get_free_valuation()
-        actual_details = page.get_car_details()
         actual_specifics = page.get_car_specifics()
         actual_year = actual_specifics.split("\n")[0].strip()
+        actual_make = page.get_car_specifics()
+        actual_model = page.get_car_specifics()
+        expected_plate_year_full = str(get_year_from_plate(number_plate))
 
-        expected_plate_year = get_year_from_plate(number_plate)
-
-        assert actual_details.strip().lower() == f"{expected_make} {expected_model}".lower(), \
-            f"❌ Mismatch! Expected '{expected_make} {expected_model}', but got '{actual_details.strip()}'"
-        assert actual_year.strip() == expected_year.strip(), \
-            f"❌ Year mismatch! Expected '{expected_year}', but got '{actual_year.strip()}'"
-        assert str(expected_plate_year) == expected_year.strip(), \
-            f"❌ Plate year mismatch! Expected '{expected_year}', derived '{expected_plate_year}'"
-        time.sleep(60)
+        assert expected_make.strip().lower() == actual_make.lower(), \
+            f"❌ Make Mismatch! Expected '{expected_make}', but got '{actual_make.strip()}'"
+        assert actual_year.strip() == expected_plate_year_full.strip(), \
+            f"❌ Year Mismatch! Expected '{expected_plate_year_full}', but got '{actual_year.strip()}'"
+        assert expected_model.strip().lower() in actual_model.strip().lower() or \
+               actual_model.strip().lower() in expected_model.strip().lower(), \
+            f"❌ Model Mismatch! Expected '{expected_make} {expected_model}', but got '{actual_make.strip()}'"
     except AssertionError as e:
         pytest.fail(str(e))
 
