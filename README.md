@@ -1,3 +1,8 @@
+This code extracts the number plates in the file car_input-V6.txt and using the number plate obtains various data elements like 
+make model from confused.com. The script will then compare that data 
+against the data stored in car_output-V6.txt and will pass if the registarion number is found and the data matches 
+
+
 SET UP:
 ******
 Code was written using a MAC
